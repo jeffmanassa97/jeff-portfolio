@@ -1,4 +1,7 @@
+/* make sure menu is after config
+so that menu can use config */
 @import "config";
+@import "menu";
 
 * {
   box-sizing: border-box;
