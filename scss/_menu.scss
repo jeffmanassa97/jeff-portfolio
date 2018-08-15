@@ -43,3 +43,118 @@
     }
   }
 }
+
+// Menu Overlay
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.9;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  // shortcut to &.menu-branding and &.menu-nav
+  &-branding,
+  &-nav {
+    // flex to make it a colomn
+    display: flex;
+    flex-flow: column wrap;
+    // vertical center
+    align-items: center;
+    // horizontal center
+    justify-content: center;
+    // float to the left
+    float: left;
+    width: 50%;
+    // height to take up whole screen
+    height: 100vh;
+    // no scroll bars
+    overflow: hidden;
+  }
+
+  &-nav {
+    margin: 0;
+    padding: 0;
+    background: darken($primary-color, 5);
+    list-style: none;
+    // slide in from the top - transform: translate()
+    // 100% pushes up, -100% pushes down
+    // x,y,z
+    transform: translate3d(0, -100%, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide In From Top
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &-branding {
+    background: $primary-color;
+
+    transform: translate3d(0, 100%, 0);
+    @include easeOut;
+    &.show {
+      // Slide In From Bottom
+      // Final position when show is complete
+      transform: translate3d(0, 0, 0);
+    }
+
+    .portrait {
+      width: 250px;
+      height: 250px;
+      // .. goes back a directory
+      background: url(../img/portrait.jpg);
+      // 50% makes it a circle
+      border-radius: 50%;
+      border: solid 3px $secondarycolor;
+    }
+  }
+
+  .nav-item {
+    // Move to from right 600px pixles
+    // 600px on the x-axis
+    transform: translate3d(600px, 0, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide in from right
+      transform: translate3d(0, 0, 0);
+    }
+
+    // secondary color of current page
+    &.current > a {
+      // Color the link
+      color: $secondarycolor;
+    }
+  }
+
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    font-size: 22pt;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    // So that the link itself eases Out
+    @include easeOut;
+
+    &:hover {
+      color: $secondarycolor;
+    }
+  }
+}
+
+// Delay each nav-item slide by 0.1s
+// 1 through 4 items
+// for loop in sass
+@for $i from 1 through 4 {
+  .nav-item:nth-child(#{$i}) {
+    transition-delay: $i * 0.1s;
+  }
+}
