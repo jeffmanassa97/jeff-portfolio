@@ -2,7 +2,6 @@
 so that menu can use config */
 @import "config";
 @import "menu";
-@import "mobile";
 
 * {
   box-sizing: border-box;
@@ -11,7 +10,9 @@ so that menu can use config */
 body {
   @include background;
   background: $primary-color;
-  color: #fff;
+  // If lightness of primary color is greater than 40,
+  // then make primary text color black
+  color: set-text-color($primary-color);
   height: 100%;
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -56,7 +57,10 @@ header {
 
 main {
   padding: 4rem;
-  height: 100%;
+  // height is just 100% of the content inside of it
+  // 60px is height of the footer
+  // this will keep the footer sticking to the bottom
+  min-height: calc(100vh - 60px);
   // only affects the class of icons inside main, nesting
   .icons {
     margin-top: 1rem;
@@ -82,3 +86,57 @@ main {
     }
   }
 }
+
+.about-info {
+  display: grid;
+  grid-gap: 30px;
+  // 3 Fractional Grid
+  grid-template-areas:
+    "bioimg bio bio"
+    "job1 job2 job3";
+  // repeat 3 times - fr - 1 fractional
+  grid-template-columns: repeat(3, 1fr);
+
+  // Set the Classes to Grid Areas
+  .bio-img {
+    grid-area: bioimg;
+    margin: auto;
+    border-radius: 50%;
+    border: $secondarycolor 3px solid;
+  }
+
+  .bio {
+    grid-area: bio;
+    font-size: 1.5rem;
+  }
+
+  .job-1 {
+    grid-area: job1;
+  }
+
+  .job-2 {
+    grid-area: job2;
+  }
+
+  .job-3 {
+    grid-area: job3;
+  }
+
+  .job {
+    background: lighten($primary-color, 5);
+    padding: 0.7rem;
+    border-bottom: $secondarycolor 5px solid;
+  }
+}
+
+#main-footer {
+  text-align: center;
+  padding: 1rem;
+  background: darken($primary-color, 10);
+  color: set-text-color($primary-color);
+  height: 60px;
+}
+
+// Meida Queries Go at the Bottom
+// Want them to run after the initial CSS
+@import "mobile";

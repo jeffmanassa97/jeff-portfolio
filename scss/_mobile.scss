@@ -45,6 +45,18 @@
       background: url("../img/portrait_small.jpg");
     }
   }
+
+  // About Page
+  .about-info {
+    grid-template-areas:
+      "bioimg"
+      "bio"
+      "job1"
+      "job2"
+      "job3";
+
+    grid-template-columns: 1fr;
+  }
 }
 // Smartphones
 @include mediaSm {

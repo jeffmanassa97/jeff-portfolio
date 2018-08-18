@@ -15,7 +15,7 @@
     // space inbetween
     // top right bottom left
     margin: 0 0 5px 0;
-    background: #fff;
+    background: set-text-color($primary-color);
     @include easeOut;
   }
 
@@ -125,6 +125,7 @@
     }
 
     // secondary color of current page
+    // secondary color may be different for pages
     &.current > a {
       // Color the link
       color: $secondarycolor;
@@ -138,7 +139,7 @@
     text-transform: uppercase;
     padding: 1rem 0;
     font-weight: 300;
-    color: #fff;
+    color: set-text-color($primary-color);
     text-decoration: none;
     // So that the link itself eases Out
     @include easeOut;
