@@ -129,6 +129,51 @@ main {
   }
 }
 
+// Work/Projects
+.projects {
+  display: grid;
+  // 3 fractionals across
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0.7rem;
+
+  img {
+    // Width to 100% of its container - will shrink it down
+    width: 100%;
+    border: 3px #fff solid;
+
+    &:hover {
+      opacity: 0.7;
+      border-color: $secondarycolor;
+      @include easeOut;
+    }
+  }
+}
+
+// Button Styles
+.btn {
+  // So they would get there own line and block
+  display: block;
+  padding: 0.5rem 1rem;
+  border: 0;
+  margin-bottom: 0.3rem;
+  &:hover {
+    background: $secondarycolor;
+    color: set-text-color($secondarycolor);
+  }
+}
+
+.btn-dark {
+  @extend .btn;
+  background: darken($primary-color, 50);
+  color: #fff;
+}
+
+.btn-light {
+  @extend .btn;
+  background: lighten($primary-color, 50);
+  color: #333;
+}
+
 #main-footer {
   text-align: center;
   padding: 1rem;
