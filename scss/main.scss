@@ -149,6 +149,36 @@ main {
   }
 }
 
+// Contact Page
+.boxes {
+  // grids will work as well
+  display: flex;
+  // So it wraps on next lines when changing screen size
+  flex-wrap: wrap;
+  // Space content evenly
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 1rem;
+
+  div {
+    font-size: 2rem;
+    border: 3px #fff solid;
+    // top & bottom, left & right
+    padding: 1.5rem 2.5rem;
+    margin-bottom: 3rem;
+    @include easeOut;
+
+    &:hover {
+      padding: 0.5rem 1.5rem;
+      background: $secondarycolor;
+      color: set-text-color($secondarycolor);
+      span {
+        color: set-text-color($secondarycolor);
+      }
+    }
+  }
+}
+
 // Button Styles
 .btn {
   // So they would get there own line and block
