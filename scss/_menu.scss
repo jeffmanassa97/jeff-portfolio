@@ -1,0 +1,160 @@
+// Menu Button
+
+.menu-btn {
+  position: absolute;
+  z-index: 3;
+  right: 35px;
+  top: 35px;
+  // controls how the cursor looks
+  cursor: pointer;
+  @include easeOut;
+
+  .btn-line {
+    width: 28px;
+    height: 3px;
+    // space inbetween
+    // top right bottom left
+    margin: 0 0 5px 0;
+    background: set-text-color($primary-color);
+    @include easeOut;
+  }
+
+  // Rotate Into X With Menu Lines
+  &.close {
+    transform: rotate(180deg);
+
+    .btn-line {
+      // Line 1 - Rotate (psuedo element)
+      // 1st line in parameter
+      // google "css transform" and look at mozilla site
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      // Line 2 - Hide
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      // Line 3 - Rotate
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+// Menu Overlay
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  // shortcut to &.menu-branding and &.menu-nav
+  &-branding,
+  &-nav {
+    // flex to make it a colomn
+    display: flex;
+    flex-flow: column wrap;
+    // vertical center
+    align-items: center;
+    // horizontal center
+    justify-content: center;
+    // float to the left
+    float: left;
+    width: 50%;
+    // height to take up whole screen
+    height: 100vh;
+    // no scroll bars
+    overflow: hidden;
+  }
+
+  &-nav {
+    margin: 0;
+    padding: 0;
+    background: rgba(darken($primary-color, 5), 0.8);
+    list-style: none;
+    // slide in from the top - transform: translate()
+    // 100% pushes up, -100% pushes down
+    // x,y,z
+    transform: translate3d(0, -100%, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide In From Top
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &-branding {
+    background: rgba($primary-color, 0.8);
+
+    transform: translate3d(0, 100%, 0);
+    @include easeOut;
+    &.show {
+      // Slide In From Bottom
+      // Final position when show is complete
+      transform: translate3d(0, 0, 0);
+    }
+
+    .portrait {
+      width: 250px;
+      height: 250px;
+      // .. goes back a directory
+      background: url("../img/portrait.jpg");
+      // 50% makes it a circle
+      border-radius: 50%;
+      border: solid 3px $secondarycolor;
+    }
+  }
+
+  .nav-item {
+    // Move to from right 600px pixles
+    // 600px on the x-axis
+    transform: translate3d(600px, 0, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide in from right
+      transform: translate3d(0, 0, 0);
+    }
+
+    // secondary color of current page
+    // secondary color may be different for pages
+    &.current > a {
+      // Color the link
+      color: $secondarycolor;
+    }
+  }
+
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    font-size: 22pt;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    font-weight: 300;
+    color: set-text-color($primary-color);
+    text-decoration: none;
+    // So that the link itself eases Out
+    @include easeOut;
+
+    &:hover {
+      color: $secondarycolor;
+    }
+  }
+}
+
+// Delay each nav-item slide by 0.1s
+// 1 through 4 items
+// for loop in sass
+@for $i from 1 through 4 {
+  .nav-item:nth-child(#{$i}) {
+    transition-delay: $i * 0.1s;
+  }
+}
